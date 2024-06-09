@@ -1,0 +1,22 @@
+[tool.black]
+line-length = 120
+extend-exclude = '''
+(
+    __pycache__
+    .git
+    .venv/
+    build/
+    dist
+    old
+    venv/
+)
+'''
+
+[tool.flake8]
+max-line-length = 120
+exclude = [".git", "__pycache__", "old", "build/", "dist", ".venv", "venv"]
+
+[tool.mypy]
+check_untyped_defs = true
+ignore_missing_imports = false
+exclude = [".git", "__pycache__", "old", "build/", "dist", ".venv", "venv"]
