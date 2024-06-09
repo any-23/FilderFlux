@@ -14,16 +14,14 @@ filderflux --log-file <name-of-log-file> sync [-h] -s SOURCE -r REPLICA [-i INTE
 optional arguments:
   -h, --help            show this help message and exit
   -s SOURCE, --source SOURCE
+                        Determination of the source folder.
   -r REPLICA, --replica REPLICA
+                        Determination of the replica folder.
   -i INTERVAL, --interval INTERVAL
+                        The interval between runs held in seconds.
 ```
 The interval between synchronisation runs is set to a value 1 s and can be changed.
 
-Example output:
-
-```
-2024-06-09 20:05:59,711 - INFO - sync.py:Source is src.  Replica is rpl. Interval is 1.
-```
 
 ## Graceful shut-down
 
