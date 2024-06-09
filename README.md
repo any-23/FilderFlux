@@ -13,6 +13,7 @@ pip install git+https://github.com/any-23/FilderFlux.git
 List of available commands:
 
 - [version](filderflux/commands/version/README.md)
+- [sync](filderflux/commands/sync/README.md)
 
 ## Development
 
@@ -44,7 +45,7 @@ To add a new command, follow these steps:
 2. **Add a subparser function:**
    - Inside your new command directory, create an `__init__.py` file.
    - Define a function in `__init__.py` to add a subparser for your command called `add_<new_command>_parser(root_parser)`.
-   - Write your `add_<new_command>_parser(root_parser)` under comment `# your commands go here`.
+   - Write your `add_<new_command>_parser(root_parser)` under comment `# your commands go here` in `filderflux.py`.
 
 3. **Create a tests subfolder:**
     - Inside your new command directory, create a tests folder.
@@ -62,8 +63,9 @@ filderflux/
 │   │   ├── new_command.py
 │   │   ├──README.md
 │   │   └── tests/
-│   │       └── test_new_command.py
-│   ├── __init__.py
+│   │       ├── test_new_command.py
+│   │       ├── __init__.py
+│   └──__init__.py
 ```
 
 ### Logging

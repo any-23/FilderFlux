@@ -1,5 +1,6 @@
 import argparse
 from filderflux.commands.version import add_version_parser
+from filderflux.commands.sync import add_sync_parser
 import logging
 import sys
 
@@ -31,6 +32,7 @@ def process_parser():
 
     # your commands go here
     add_version_parser(subparsers)
+    add_sync_parser(subparsers)
 
     args = parser.parse_args()
     configure_logger(args)
