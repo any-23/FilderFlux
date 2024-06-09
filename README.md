@@ -39,9 +39,9 @@ To add a new command, follow these steps:
 2. **Add a subparser function:**
    - Inside your new command directory, create an `__init__.py` file.
    - Define a function in `__init__.py` to add a subparser for your command called `add_<new_command>_parser(root_parser)`.
+   - Write your `add_<new_command>_parser(root_parser)` under comment `# your commands go here`.
 
 3. **Create a tests subfolder:**
-
     - Inside your new command directory, create a tests folder.
     - Add unit tests for your command inside the tests folder.
 
