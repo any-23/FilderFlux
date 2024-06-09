@@ -59,3 +59,11 @@ filderflux/
 │   │       └── test_new_command.py
 │   ├── __init__.py
 ```
+
+### Logging
+
+When adding a new command and incorporating logging, it is recommended to utilise the preconfigured logger defined in filderflux.py. To instantiate the logger in your module, use the following convention:
+
+```
+logger = logging.getLogger(__name__)
+```
