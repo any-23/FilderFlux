@@ -1,5 +1,8 @@
 import argparse
 from importlib.metadata import PackageNotFoundError, version
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def cli_version() -> str:
@@ -12,6 +15,6 @@ def cli_version() -> str:
 def handle_version(args: argparse.Namespace) -> None:
     version = cli_version()
     if version:
-        print(f"Version of filderflux is {version}.")
+        logger.info(f"Version of filderflux is {version}.")
     else:
-        print("Package is not installed.")
+        logger.warning("Package is not installed.")
