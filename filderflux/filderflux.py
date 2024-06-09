@@ -26,7 +26,7 @@ def configure_logger(args: argparse.Namespace):
 
 def process_parser():
     parser = argparse.ArgumentParser(description="Simple tool for folder synchronisation")
-    parser.add_argument("-l", "--log-file", type=str, help="Path to the logfile")
+    parser.add_argument("-l", "--log-file", type=str, required=True, help="Path to the logfile")
     subparsers = parser.add_subparsers(help="Available commands")
 
     # your commands go here

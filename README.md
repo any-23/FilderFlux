@@ -8,6 +8,11 @@ To install FilderFlux, use pip:
 ```
 pip install git+https://github.com/any-23/FilderFlux.git
 ```
+## Commands
+
+List of available commands:
+
+- [version](filderflux/commands/version/README.md)
 
 ## Development
 
@@ -55,6 +60,7 @@ filderflux/
 │   ├── new_command/
 │   │   ├── __init__.py
 │   │   ├── new_command.py
+│   │   ├──README.md
 │   │   └── tests/
 │   │       └── test_new_command.py
 │   ├── __init__.py
@@ -67,3 +73,4 @@ When adding a new command and incorporating logging, it is recommended to utilis
 ```
 logger = logging.getLogger(__name__)
 ```
+
