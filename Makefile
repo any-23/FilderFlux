@@ -1,4 +1,4 @@
-.PHONY: flake8 black mypy lint pytest
+.PHONY: flake8 black mypy lint test
 
 flake8:
 	flake8 . --toml-config=pyproject.toml
