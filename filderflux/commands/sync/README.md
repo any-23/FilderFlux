@@ -4,6 +4,8 @@ Sync command provides one-way content synchronisation from source to replica. Bo
 
 ⚠️ **Warning:** All folders which are located only in the replica will be deleted during synchronisation run.
 
+⚠️ **Warning:** Please note that our synchronisation tool does not process system-specific files such as .DS_Store on macOS, Thumbs.db on Windows, or similar files.
+
 ## Usage
 
 To select the source and the replica folder for the sync, you can run the following command:
@@ -39,9 +41,9 @@ It is possible due to I/O operations in the source or replica folder the state w
 
 2. Delete entities exclusive to the replica folder.
 
-3. Compare checksums for files in the source and replica folders
+3. Read and compare the files in source and the replica in chunks (8 KB) to handle large files efficiently.
 
-4. Copy files with differing checksums or missing files in the source folder.
+4. Copy differing files or missing files in the source folder.
 
 5. Recursively apply the algorithm to subfolders.
 
