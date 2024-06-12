@@ -1,7 +1,6 @@
 # Testing functionality:
 # - sample testing file
 # - mocking external version function from importlib to avoid test dependency on git tag
-# - mocking in-house cli_version function to test handle_version
 
 from unittest.mock import patch
 from importlib.metadata import PackageNotFoundError
