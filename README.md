@@ -3,11 +3,16 @@ Simple tool for folder synchronisation
 
 ## Installation
 
+### Prefered way
+
 To install FilderFlux, use pip:
 
 ```
 pip install git+https://github.com/any-23/FilderFlux.git
 ```
+
+⚠️ **Warning:** PyPI distribution is still in progress.
+
 ## Commands
 
 List of available commands:
