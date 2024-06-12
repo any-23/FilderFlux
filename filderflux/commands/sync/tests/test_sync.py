@@ -158,23 +158,23 @@ def test_compare_files():
     file5 = create_blank_temporary_file(test_folder, "file5.txt")
     file6 = create_blank_temporary_file(test_folder, "file6.txt")
 
-    # Identical files
+    # identical files
     assert compare_files(pathlib.Path(file1), pathlib.Path(file2)), "Expected files to be identical."
 
-    # Non-identical files
+    # non-identical files
     assert not compare_files(pathlib.Path(file1), pathlib.Path(file3)), "Expected files to be different."
 
-    # Existing file vs. non0existing file
+    # existing file vs. non0existing file
     assert not compare_files(
         pathlib.Path(file1), pathlib.Path(file4)
     ), "Expected comparison with non-existent file to be False."
 
-    # Non-existing file vs. non-existing file
+    # non-existing file vs. non-existing file
     assert not compare_files(
         pathlib.Path(file4), pathlib.Path(file4)
     ), "Expected comparison of two non-existent files to be False."
 
-    # Test two blank files
+    # test two blank files
     assert compare_files(pathlib.Path(file5), pathlib.Path(file6)), "Expected two blank files to be identical"
 
     shutil.rmtree(test_folder)
@@ -184,21 +184,21 @@ def test_copy_file():
     # existing file
     test_folder = create_temporary_folder()
     source_file = create_temporary_file(test_folder, "source_file.txt", "This is some content.")
-    repl_file = os.path.join(test_folder, "repl_file.txt")
+    replica_file = os.path.join(test_folder, "replica_file.txt")
 
-    copy_file(pathlib.Path(source_file), pathlib.Path(repl_file))
+    copy_file(pathlib.Path(source_file), pathlib.Path(replica_file))
 
-    assert os.path.exists(repl_file), "Expected the replica file to exist."
-    with open(repl_file, "r") as file:
+    assert os.path.exists(replica_file), "Expected the replica file to exist."
+    with open(replica_file, "r") as file:
         assert file.read() == "This is some content.", "Expected the replica file content to match the source file."
 
     # non-existing file
     non_existing_source = os.path.join(test_folder, "non_existing.txt")
-    non_existing_repl = os.path.join(test_folder, "non_existing_repl.txt")
+    non_existing_replica = os.path.join(test_folder, "non_existing_replica.txt")
 
-    copy_file(pathlib.Path(non_existing_source), pathlib.Path(non_existing_repl))
+    copy_file(pathlib.Path(non_existing_source), pathlib.Path(non_existing_replica))
 
-    assert not os.path.exists(non_existing_repl), "Expected the replica file not to exist for non-existing source."
+    assert not os.path.exists(non_existing_replica), "Expected the replica file not to exist for non-existing source."
 
     shutil.rmtree(test_folder)
 
@@ -206,11 +206,11 @@ def test_copy_file():
 def test_copy_folder():
     test_folder = create_temporary_folder()
     source_folder = create_temporary_folder()
-    repl_folder = os.path.join(test_folder, "repl_folder")
+    replica_folder = os.path.join(test_folder, "replica_folder")
 
-    copy_folder(pathlib.Path(source_folder), pathlib.Path(repl_folder), pathlib.Path(source_folder).parent)
+    copy_folder(pathlib.Path(source_folder), pathlib.Path(replica_folder), pathlib.Path(source_folder).parent)
 
-    assert os.path.exists(repl_folder), "Expected the replica folder to exist after copying."
+    assert os.path.exists(replica_folder), "Expected the replica folder to exist after copying."
 
 
 def test_sync_folder():
