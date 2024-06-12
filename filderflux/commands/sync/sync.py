@@ -188,9 +188,22 @@ def handle_sync(args: argparse.Namespace) -> None:
     source_folder_path = pathlib.Path(args.source)
     replica_folder_path = pathlib.Path(args.replica)
 
-    while not shutdown_flag:
-        sync_folder(source_folder_path, replica_folder_path)
-        time.sleep(args.interval)
+    if source_folder_path.exists():
+        counter = 0
 
-    sync_folder(source_folder_path, replica_folder_path)
-    logger.info("Sync process completed. Shutdown procedure finished.")
+        while not shutdown_flag:
+            sync_folder(source_folder_path, replica_folder_path)
+            counter += 1
+            logger.info(f"Round {counter} of synchronisation.")
+            if not shutdown_flag:
+                time.sleep(args.interval)
+
+        counter = 0
+        sync_folder(source_folder_path, replica_folder_path)
+        logger.info("Synchronisation process completed. Shutdown procedure finished.")
+
+    else:
+        logger.error(f"{source_folder_path} does not exist. Cannot synchronise.")
+        if replica_folder_path.exists():
+            shutil.rmtree(replica_folder_path)
+            logger.info(f"Replica folder {replica_folder_path} removed.")

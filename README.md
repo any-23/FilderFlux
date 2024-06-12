@@ -15,6 +15,13 @@ List of available commands:
 - [version](filderflux/commands/version/README.md)
 - [sync](filderflux/commands/sync/README.md)
 
+List of available arguments:
+
+- [--source, -s](filderflux/commands/sync/README.md)
+- [--replica, -r](filderflux/commands/sync/README.md)
+- [--interval, -i](filderflux/commands/sync/README.md)
+- [--log-file, -l](filderflux/commands/sync/README.md)
+
 ## Development
 
 ### Building Distribution Packages
@@ -40,7 +47,7 @@ To add a new command, follow these steps:
 
 1. **Create a new module for your command:**
    - Go to the `filderflux/commands` folder.
-   - Create a new directory named after your command (e.g., `delete`).
+   - Create a new directory named after your command (e.g., `sync`).
 
 2. **Add a subparser function:**
    - Inside your new command directory, create an `__init__.py` file.
@@ -75,4 +82,3 @@ When adding a new command and incorporating logging, it is recommended to utilis
 ```
 logger = logging.getLogger(__name__)
 ```
-
