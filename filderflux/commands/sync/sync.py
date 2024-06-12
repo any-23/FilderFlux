@@ -101,20 +101,21 @@ def compare_files(file_path_1: pathlib.Path, file_path_2: pathlib.Path) -> bool:
                 return True
 
 
-def copy_file(file_path_1: pathlib.Path, file_path_2: pathlib.Path) -> None:
+def copy_file(source_file_path: pathlib.Path, replica_file_path: pathlib.Path) -> None:
     """
     Copy the content of source file to replica file.
     """
     try:
-        with file_path_1.open("rb") as src_file, file_path_2.open("wb") as repl_file:
+        with source_file_path.open("rb") as src_file, replica_file_path.open("wb") as repl_file:
             chunk_size = 8192
             while True:
                 chunk = src_file.read(chunk_size)
                 if not chunk:
                     break
                 repl_file.write(chunk)
+        logger.info(f"Copied file from {source_file_path} to {replica_file_path}")
     except Exception as e:
-        logger.error(f"Error copying file from {file_path_1} to {file_path_2}: {e}")
+        logger.error(f"Error copying file from {source_file_path} to {replica_file_path}: {e}")
 
 
 def copy_folder(
@@ -134,6 +135,8 @@ def copy_folder(
             else:
                 replica_item_path.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copy2(item, replica_item_path)
+                logger.info(f"Copied file from {item} to {replica_item_path}")
+        logger.info(f"Copied folder from {source_folder_path} to {replica_folder_path}")
     except Exception as e:
         logger.error(f"Error copying folder from {source_folder_path} to {replica_folder_path}: {e}")
 

@@ -22,7 +22,7 @@ List of available arguments:
 - [--interval, -i](filderflux/commands/sync/README.md)
 - [--log-file, -l](filderflux/commands/sync/README.md)
 
-## Development
+## Development and Tests
 
 ### Building Distribution Packages
 
@@ -82,3 +82,11 @@ When adding a new command and incorporating logging, it is recommended to utilis
 ```
 logger = logging.getLogger(__name__)
 ```
+
+### Unit Tests
+
+The package includes comprehensive unit tests to cover various scenarios for both the sync and version commands. When adding new features or modifying existing ones, ensure to include corresponding unit tests to maintain the integrity of the package.
+
+## Contributing
+
+Contributions and feature requests are welcome! Please ensure that any changes are accompanied by relevant tests and documentation updates.
