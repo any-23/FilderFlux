@@ -89,4 +89,4 @@ The package includes comprehensive unit tests to cover various scenarios for bot
 
 ## Contributing
 
-Contributions are welcome! Please ensure that any changes are accompanied by relevant tests and documentation updates.
+Contributions and feature requests are welcome! Please ensure that any changes are accompanied by relevant tests and documentation updates.
