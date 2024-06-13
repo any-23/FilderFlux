@@ -1,4 +1,4 @@
-[Demo of the project](filderflux/docs/filderflux_demo.gif)
+[Demo of the project](docs/filderflux_demo.gif)
 
 # FilderFlux
 Simple tool for folder synchronisation
