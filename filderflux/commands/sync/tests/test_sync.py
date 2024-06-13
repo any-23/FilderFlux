@@ -338,6 +338,8 @@ def test_handle_sync():
         os.path.basename(source_file)
     }, "Expected files to be synchronised."
 
+    sync_thread.join()
+
     # the shutdown signal interrupts the synchronisation process
     source_folder = create_temporary_folder()
     source_file = create_temporary_file(source_folder, "source_file.txt", "This is some content.")
