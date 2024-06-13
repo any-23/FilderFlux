@@ -1,3 +1,5 @@
+![Demo of the project](filderflux/docs/filderflux_demo.gif)
+
 # FilderFlux
 Simple tool for folder synchronisation
 
