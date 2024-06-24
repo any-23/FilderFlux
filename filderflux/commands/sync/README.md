@@ -41,9 +41,13 @@ It is possible due to I/O operations in the source or replica folder the state w
 
 2. Delete entities exclusive to the replica folder.
 
-3. Read and compare the files in source and the replica in chunks (8 KB) to handle large files efficiently.
+3. Read and compare the files in the source and the replica in chunks (8 KB) to handle large files efficiently.
 
 4. Copy differing files or missing files in the source folder.
 
 5. Recursively apply the algorithm to subfolders.
 
+## Future updates
+- adding test case into the test_sync_folder unit test for non-existing source folder
+- adding test case into test_copy_folder unit test for non-existing source folder
+- handle the hidden and non-hidden files/folders in get_all_folders/get_all_files
