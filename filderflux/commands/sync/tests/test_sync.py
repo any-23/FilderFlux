@@ -22,6 +22,22 @@ from filderflux.commands.sync import sync
 
 
 def test_shutdown_handler():
+    """
+    Unit test the shutdown_handler function to ensure it sets the shutdown_flag to True.
+
+    This test simulates the behaviour of the shutdown_handler when it receives a SIGINT
+    signal. It first resets the shutdown_flag to False, then calls the shutdown_handler,
+    and finally asserts that the shutdown_flag has been set to True.
+
+    The shutdown_handler function is expected to set the shutdown_flag to True when it
+    handles a SIGINT signal, which is typically sent when a user interrupts the program
+    (Ctrl+C).
+
+    Raises:
+        AssertionError: If the shutdown_flag is not set to True after calling the
+                        shutdown_handler.
+    """
+
     sync.shutdown_flag = False
 
     sync.shutdown_handler(signal.SIGINT, None)
@@ -29,24 +45,48 @@ def test_shutdown_handler():
     assert sync.shutdown_flag, "Expected shutdown flag to be True after calling the shutdown handler."
 
 
-def create_temporary_folder() -> str:
+def create_temporary_folder():
     """
     Create a temporary folder and return its path.
+
+    Returns:
+    str: Path to the newly created temporary folder.
     """
+
     return tempfile.mkdtemp()
 
 
-def create_temporary_file(folder, filename, content="Sample content."):
+def create_temporary_file(folder: str, filename: str, content: str = "Sample content.") -> str:
     """
     Create a temporary file inside the specified folder and return its path.
+
+    Parameters:
+    folder (str): The path to the folder where the temporary file will be created.
+    filename (str): The name of the temporary file to be created.
+    content (str): The content to write to the temporary file. Defaults to "Sample content."
+
+    Returns:
+    str: The path to the created temporary file.
     """
+
     path = os.path.join(folder, filename)
     with open(path, "w") as temp_file:
         temp_file.write(content)
     return path
 
 
-def create_blank_temporary_file(folder, filename):
+def create_blank_temporary_file(folder: str, filename: str) -> str:
+    """
+    Create a blank temporary file inside the specified folder and return its path.
+
+    Parameters:
+    folder (str): The path to the folder where the temporary file will be created.
+    filename (str): The name of the temporary file to be created.
+
+    Returns:
+    str: The path to the created temporary file.
+    """
+
     path = os.path.join(folder, filename)
     with open(path, "w") as _:
         pass
@@ -54,6 +94,19 @@ def create_blank_temporary_file(folder, filename):
 
 
 def test_get_all_folders():
+    """
+    Test the get_all_folders function to ensure it correctly identifies all subfolders within a specified folder.
+
+    Steps:
+    1. Create a temporary test folder.
+    2. Create a subfolder within the test folder.
+    3. Verify that the subfolder is included in the set of folders returned by get_all_folders.
+    4. Clean up by deleting the temporary test folder and its contents.
+
+    Raises:
+    AssertionError: If the subfolder is not found in the set of folders returned by get_all_folders.
+    """
+
     test_folder = create_temporary_folder()
     subfolder = os.path.join(test_folder, "subfolder")
     os.makedirs(subfolder)
@@ -65,6 +118,16 @@ def test_get_all_folders():
 
 
 def test_get_all_files():
+    """
+    Unit test to verify the functionality of get_all_files function.
+
+    Creates a temporary folder with files and subfolders, then checks if
+    get_all_files correctly identifies all files within the test folder
+    and its subfolders.
+
+    Raises AssertionError if any expected file is missing from the result.
+    """
+
     test_folder = create_temporary_folder()
     test_file = create_temporary_file(test_folder, "file.txt")
     subfolder = os.path.join(test_folder, "subfolder")
@@ -79,6 +142,16 @@ def test_get_all_files():
 
 
 def test_remove_redundant_folders():
+    """
+    Unit test to verify the functionality of remove_redundant_folders function.
+
+    Creates a temporary folder with multiple subfolders, defines a set of folders
+    to preserve, and checks if remove_redundant_folders correctly removes folders
+    that are not in the set of folders to preserve.
+
+    Raises AssertionError if any unexpected folder remains after calling the function.
+    """
+
     test_folder = create_temporary_folder()
     subfolder1 = os.path.join(test_folder, "subfolder1")
     subfolder2 = os.path.join(test_folder, "subfolder2")
@@ -97,6 +170,16 @@ def test_remove_redundant_folders():
 
 
 def test_remove_redundant_files():
+    """
+    Unit test to verify the functionality of remove_redundant_files function.
+
+    Creates a temporary folder with multiple files, defines a set of files
+    to preserve, and checks if remove_redundant_files correctly removes files
+    that are not in the set of files to preserve.
+
+    Raises AssertionError if any unexpected file remains after calling the function.
+    """
+
     test_folder = create_temporary_folder()
     test_file1 = create_temporary_file(test_folder, "file1.txt")
     test_file2 = create_temporary_file(test_folder, "file2.txt")
@@ -113,6 +196,19 @@ def test_remove_redundant_files():
 
 
 def test_build_path():
+    """
+    Unit test for the build_path function.
+
+    - Tests building a path with a basic folder and name.
+    - Tests building a path with a nested name.
+    - Tests building a path with an empty name.
+    - Tests building a path starting from the root.
+    - Tests building a path using a relative folder path.
+    - Tests building a path with special characters in the name.
+
+    Each test case asserts that the returned path from build_path matches the expected path.
+    """
+
     # basic test case
     folder_path = pathlib.Path("/home/user")
     name = pathlib.Path("documents")
@@ -149,6 +245,18 @@ def test_build_path():
 
 
 def test_compare_files():
+    """
+    Unit test for the compare_files function.
+
+    - Tests comparing two identical files.
+    - Tests comparing two files with different content.
+    - Tests comparing an existing file with a non-existent file.
+    - Tests comparing two non-existent files.
+    - Tests comparing two blank files.
+
+    Each test case asserts that the return value from compare_files matches the expected comparison result.
+    """
+
     test_folder = create_temporary_folder()
 
     file1 = create_temporary_file(test_folder, "file1.txt", "This is some content.")
@@ -181,6 +289,15 @@ def test_compare_files():
 
 
 def test_copy_file():
+    """
+    Unit test for the copy_file function.
+
+    - Tests copying an existing file to a replica file.
+    - Tests copying a non-existing file (should not create a replica file).
+
+    Each test case asserts the expected behaviour of the copy_file function.
+    """
+
     # existing file
     test_folder = create_temporary_folder()
     source_file = create_temporary_file(test_folder, "source_file.txt", "This is some content.")
@@ -204,6 +321,15 @@ def test_copy_file():
 
 
 def test_copy_folder():
+    """
+    Unit test for the copy_folder function.
+
+    - Tests copying an existing source folder to a replica folder.
+
+    Each test case asserts the expected behaviour of the copy_folder function.
+    """
+
+    # existing folder
     test_folder = create_temporary_folder()
     source_folder = create_temporary_folder()
     replica_folder = os.path.join(test_folder, "replica_folder")
@@ -212,8 +338,23 @@ def test_copy_folder():
 
     assert os.path.exists(replica_folder), "Expected the replica folder to exist after copying."
 
+    shutil.rmtree(test_folder)
+    shutil.rmtree(source_folder)
+
 
 def test_sync_folder():
+    """
+    Unit test for the sync_folder function.
+
+    - Tests syncing an empty source folder with an empty replica folder.
+    - Tests syncing a source folder containing only files.
+    - Tests syncing a source folder containing only subfolders.
+    - Tests syncing a source folder containing both files and subfolders.
+    - Tests syncing a source folder where the replica folder already exists and needs synchronization.
+
+    Each test case asserts the expected behaviour of the sync_folder function.
+    """
+
     # source and replica folders are empty
     source_folder = create_temporary_folder()
     replica_folder = create_temporary_folder()
@@ -232,7 +373,7 @@ def test_sync_folder():
 
     assert get_all_folders(pathlib.Path(replica_folder)) == set(), "Expected replica folder to remain empty."
     assert {file.name for file in get_all_files(pathlib.Path(replica_folder))} == {
-        os.path.basename(source_file)
+        os.path.basename(source_file)  # extract last component of the path
     }, "Expected files to be copied."
 
     # source folder contains only subfolders
@@ -282,8 +423,23 @@ def test_sync_folder():
         os.path.basename(source_file)
     }, "Expected only the source file to be synchronised."
 
+    shutil.rmtree(replica_folder)
+    shutil.rmtree(source_folder)
+
 
 def test_handle_sync():
+    """
+    Unit test for the handle_sync function.
+
+    - Tests handling synchronisation when both source and replica folders are initially empty.
+    - Tests updating the replica folder when it already exists with pre-existing content.
+    - Tests behaviour when the source or the replica folder do not exist.
+    - Tests successful completion of synchronisation process with expected file synchronisation.
+    - Tests interruption of synchronisation process upon receiving a shutdown signal.
+
+    Each test case verifies the expected behaviour of the handle_sync function based on different scenarios.
+    """
+
     # both source and replica folders are empty
     source_folder = create_temporary_folder()
     replica_folder = create_temporary_folder()
@@ -313,7 +469,7 @@ def test_handle_sync():
         os.path.basename(source_file)
     }, "Expected only the source file to be synced."
 
-    # the source or replica folders do not exist
+    # source or replica folder do not exist
     non_existing_source_folder = "/non_existing_source"
     non_existing_replica_folder = "/non_existing_replica"
 
@@ -329,7 +485,11 @@ def test_handle_sync():
     replica_folder = create_temporary_folder()
 
     args = argparse.Namespace(source=source_folder, replica=replica_folder, interval=1)
-    sync_thread = Thread(target=handle_sync, args=(args,))
+    sync_thread = Thread(
+        target=handle_sync, args=(args,)
+    )  # multiple functions are running concurrently in the same process, using threads is beneficial for testing
+    # scenarios where verifying synchronisation, interruption, or completion behaviours without blocking the main thread
+
     sync_thread.start()
 
     time.sleep(1)
@@ -357,3 +517,6 @@ def test_handle_sync():
     sync_thread.join()
 
     assert not sync_thread.is_alive(), "Expected synchronisation process to be interrupted."
+
+    shutil.rmtree(replica_folder)
+    shutil.rmtree(source_folder)

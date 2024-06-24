@@ -75,11 +75,11 @@ filderflux/
 │   ├── new_command/
 │   │   ├── __init__.py
 │   │   ├── new_command.py
-│   │   ├──README.md
+│   │   ├── README.md
 │   │   └── tests/
 │   │       ├── test_new_command.py
 │   │       ├── __init__.py
-│   └──__init__.py
+│   └── __init__.py
 ```
 
 ### Logging
@@ -97,3 +97,11 @@ The package includes comprehensive unit tests to cover various scenarios for bot
 ## Contributing
 
 Contributions and feature requests are welcome! Please ensure that any changes are accompanied by relevant tests and documentation updates.
+
+## Future plans
+- add E2E tests to validate the entire workflow
+- test cases:
+    1. Run complete synchronisation cycles (filderflux sync command) with varying folder structures and content.
+    2. Validate synchronisation across different operating systems and environments.
+    3. Test edge cases such as network interruptions, permission issues, large file handling, and scalability.
+    4. Test security handling such as authentication, encryption of data, secure file handling, etc.
